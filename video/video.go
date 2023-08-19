@@ -10,9 +10,7 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"os"
-
-	"github.com/joho/godotenv"
+	"strconv"
 )
 
 const AllowedCORSDomain = "http://localhost"
@@ -71,16 +69,13 @@ func RespondWithSuccess(parDato interface{}, parWriter http.ResponseWriter) {
 
 //===================================================================================================
 
-func DefinirCadenaConexion(parCadenaConexion string) {
+func StringToInt64(parCadena string) (int64, error) {
 
-	var _ = godotenv.Load(".env") // Cargar del archivo llamado ".env"
-	var (
-		parCadenaConexion2 = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
-			os.Getenv("user"),
-			os.Getenv("pass"),
-			os.Getenv("host"),
-			os.Getenv("port"),
-			os.Getenv("db_name"))
-	)
-	parCadenaConexion = parCadenaConexion2
+	auxNumero, err := strconv.ParseInt(parCadena, 0, 64)
+
+	if err != nil {
+		return 0, err
+	}
+
+	return auxNumero, err
 }
