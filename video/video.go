@@ -8,7 +8,7 @@ import (
 )
 
 func Hola() {
-	fmt.Println("culo")
+	fmt.Println("test mod")
 }
 
 func ConectarDB(parConnectionString string) (*sql.DB, error) {
