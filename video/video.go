@@ -9,6 +9,10 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 
 	"github.com/gorilla/mux"
+
+	"os"
+
+	"github.com/joho/godotenv"
 )
 
 const AllowedCORSDomain = "http://localhost"
@@ -63,4 +67,20 @@ func RespondWithSuccess(parDato interface{}, parWriter http.ResponseWriter) {
 	parWriter.WriteHeader(http.StatusOK)
 	json.NewEncoder(parWriter).Encode(parDato)
 
+}
+
+//===================================================================================================
+
+func DefinirCadenaConexion(parCadenaConexion string) {
+
+	var _ = godotenv.Load(".env") // Cargar del archivo llamado ".env"
+	var (
+		parCadenaConexion2 = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
+			os.Getenv("user"),
+			os.Getenv("pass"),
+			os.Getenv("host"),
+			os.Getenv("port"),
+			os.Getenv("db_name"))
+	)
+	parCadenaConexion = parCadenaConexion2
 }
