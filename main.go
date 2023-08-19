@@ -1,6 +1,6 @@
 package main
 
-import "src/github.com/GabrielHernanQuinteros/video/video"
+import "github.com/GabrielHernanQuinteros/prueba/video"
 
 func main() {
 
